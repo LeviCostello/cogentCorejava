@@ -21,22 +21,24 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return Optional.ofNullable(employee2);
 	}
 	
-	public Optional<List<Employee>> getEmployeeById(String id){
-		return null;
+	public Optional<Employee> getEmployeeById(String id){
+		return employeeRepository.findById(id);
 	}
-	public Optional<List<Employee>> getEmployees() {
-		return null;
+	public List<Employee> getEmployees() {
+		return employeeRepository.findAll();
 	}
 
-	public String deleteEmployeeById(String id){
-		return null;
+	public void deleteEmployeeById(String id){
+		employeeRepository.deleteById(id);;
 	}
 
 	public void deleteAllEmployees() {
+		employeeRepository.deleteAll();
 	}
 
-	public String updateEmployee(Employee employee){
-		return null;
+	public Optional<Employee> updateEmployee(Employee employee){
+		Employee employee2 = employeeRepository.save(employee);
+		return Optional.ofNullable(employee2);
 	}
 
 	public Employee[] getEmployeeByName(String firstName) {
@@ -44,7 +46,6 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	public boolean isEmployeeExists(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		return employeeRepository.existsById(id);
 	}
 }
